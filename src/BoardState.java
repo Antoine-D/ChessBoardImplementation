@@ -3,6 +3,7 @@
  * @author antoine
  *
  */
-public class BoardState {
-
+public class BoardState 
+{
+	
 }
