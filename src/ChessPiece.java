@@ -10,14 +10,16 @@ import java.util.Map;
 public abstract class ChessPiece 
 {
 	private Map<String, Integer> pieceLocation;
+	private boolean isWhite;
 	
 	/**
 	 * Create a new chess piece
 	 * @param column integer the column of the new piece
 	 * @param row integer the row of the piece's number equivalent (a=0, b=1, c=2, etc.)
 	 */
-	public ChessPiece(int column, int row)
+	public ChessPiece(int column, int row, boolean isWhite)
 	{
+		this.isWhite = isWhite;
 		this.pieceLocation = new HashMap<String, Integer>();
 		pieceLocation.put("Column", column);
 		pieceLocation.put("Row", row);
@@ -40,5 +42,5 @@ public abstract class ChessPiece
 	/**
 	 * Get's the possible locations that the piece can move to
 	 */
-	public abstract ArrayList<Map<String, Integer>> getPossibleMoveToLocations();
+	public abstract ArrayList<Map<String, Integer>> getPossibleMoveToLocations(BoardState stateOfBoard);
 }
