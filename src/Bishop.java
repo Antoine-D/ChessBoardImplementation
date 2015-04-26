@@ -17,12 +17,15 @@ public class Bishop extends ChessPiece {
 			BoardState stateOfBoard) 
 	{
 		// List of possible move-to-locations
-		ArrayList<Map<String, Integer>> possibleMoveLocations = new ArrayList<Map<String, Integer>>();
+		ArrayList<Map<String, Integer>> possibleMoveLocations = 
+				new ArrayList<Map<String, Integer>>();
 
 		// Check for each of the four diagonal directions that the bishop can
 		// move in
-		for (int columnIncrement = -1; columnIncrement <= 1; columnIncrement += 2) {
-			for (int rowIncrement = -1; rowIncrement <= 1; rowIncrement += 2) {
+		for (int columnIncrement = -1; columnIncrement <= 1; columnIncrement += 2) 
+		{
+			for (int rowIncrement = -1; rowIncrement <= 1; rowIncrement += 2) 
+			{
 				// Set the diagonal iterator to one past the bishop's current
 				// position
 				int columnIterator = super.pieceLocation.get("Column")
@@ -30,35 +33,28 @@ public class Bishop extends ChessPiece {
 				int rowIterator = super.pieceLocation.get("Row") + rowIncrement;
 
 				while (rowIterator >= 0 && columnIterator >= 0
-						&& rowIterator < 8 && columnIterator < 8) {
+						&& rowIterator < 8 && columnIterator < 8) 
+				{
+					// Check that the location is valid
+					if(super.isLocationValid(columnIterator, rowIterator, stateOfBoard))
+					{
+						//System.out.println("here with col:" + columnIterator + "   row:" + rowIterator);
 
-					ChessPiece pieceAtPosition = stateOfBoard
-							.getPieceAtPosition(columnIterator, rowIterator);
-
-					// If a piece exists at the position, then check if it's one
-					// of your own
-					// and stop checking this diagonal.
-					if (pieceAtPosition != null) {
-						// If the piece is not one of your own, then can take it
-						// (so add to possible move)
-						if (pieceAtPosition.isWhite != super.isWhite) {
-							Map<String, Integer> possibleMoveToPosition = new HashMap<String, Integer>();
-							possibleMoveToPosition
-									.put("Column", columnIterator);
-							possibleMoveToPosition.put("Row", rowIterator);
-							possibleMoveLocations.add(possibleMoveToPosition);
+						Map<String, Integer> validMoveToPosition = new HashMap<String, Integer>();
+						validMoveToPosition.put("Column", columnIterator);
+						validMoveToPosition.put("Row", rowIterator);
+						possibleMoveLocations.add(validMoveToPosition);
+						
+						// If the valid square has a piece on it, then stop this direction's iteration
+						if(stateOfBoard.getPieceAtPosition(columnIterator, rowIterator) != null)
+						{
+							break;
 						}
-
-						break;
 					}
-
-					// If no piece at the position then add the position to the
-					// list and continue iterating down the diagonol
-					else {
-						Map<String, Integer> possibleMoveToPosition = new HashMap<String, Integer>();
-						possibleMoveToPosition.put("Column", columnIterator);
-						possibleMoveToPosition.put("Row", rowIterator);
-						possibleMoveLocations.add(possibleMoveToPosition);
+					
+					else
+					{
+						break;
 					}
 
 					// Go onto the next space in the diagonal path

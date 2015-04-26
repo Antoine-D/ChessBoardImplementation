@@ -36,11 +36,27 @@ public abstract class ChessPiece
 	
 	/**
 	 * Move piece to the new location
-	 * @param newLocation the new square to move the piece to
 	 */
-	public void moveTo(Map<String, Integer> newLocation)
+	public void moveTo(int column, int row)
 	{
+		Map<String, Integer> newLocation = new HashMap<String, Integer>();
+		newLocation.put("Column", column);
+		newLocation.put("Row", row);
+		
 		this.pieceLocation = newLocation;
+	}
+	
+	/**
+	 * Checks if a location is valid for the piece to move to
+	 */
+	public boolean isLocationValid(int columnToCheck, int rowToCheck, BoardState stateOfBoard)
+	{
+		// Grab the piece on that square (if it's empty then it'll be null)
+		ChessPiece pieceAtPosition = stateOfBoard.getPieceAtPosition(
+				columnToCheck, rowToCheck);
+		
+		// The square is valid if it's empty or the piece on the square isn't the same color
+		return (pieceAtPosition == null || pieceAtPosition.isWhite != this.isWhite);
 	}
 	
 	/**
