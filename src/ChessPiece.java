@@ -35,6 +35,15 @@ public abstract class ChessPiece
 	}
 	
 	/**
+	 * Move piece to the new location
+	 * @param newLocation the new square to move the piece to
+	 */
+	public void moveTo(Map<String, Integer> newLocation)
+	{
+		this.pieceLocation = newLocation;
+	}
+	
+	/**
 	 * Get's the possible locations that the piece can move to
 	 */
 	public abstract ArrayList<Map<String, Integer>> getPossibleMoveToLocations(BoardState stateOfBoard);
