@@ -13,6 +13,7 @@ public class BoardState
 	{		
 		this.boardPieces = new ArrayList<ChessPiece>();
 		
+				/* Create White's Pieces */
 		// Create whites pawns
 		for(int i = 0; i < 8; i++)
 		{
@@ -20,12 +21,22 @@ public class BoardState
 			this.boardPieces.add(pawn);
 		}
 		
+		//Create rest of white's pieces
+		this.boardPieces.add(new Bishop(2, (whiteStartBottom ? 0 : 7), true));
+		this.boardPieces.add(new Bishop(5, (whiteStartBottom ? 0 : 7), true));
+		
+		
+				/* Create Black's Pieces */
 		// Create blacks pawns
 		for(int i = 0; i < 8; i++)
 		{
 			Pawn pawn = new Pawn(i,(!whiteStartBottom ? 1 : 6), false);
 			this.boardPieces.add(pawn);
 		}
+		
+		// Create rest of black's pieces
+		this.boardPieces.add(new Bishop(2, (whiteStartBottom ? 0 : 7), false));
+		this.boardPieces.add(new Bishop(5, (whiteStartBottom ? 0 : 7), false));
 	}
 	
 	public ArrayList<ChessPiece> getAllPieces()

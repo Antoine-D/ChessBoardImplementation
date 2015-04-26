@@ -26,6 +26,7 @@ import java.util.HashMap;
 	@Override
 	public ArrayList<Map<String, Integer>> getPossibleMoveToLocations(BoardState stateOfBoard) 
 	{
+		// List of possible move-to-locations
 		ArrayList<Map<String, Integer>> possibleMoveLocations = 
 				new ArrayList<Map<String, Integer>>();
 		
