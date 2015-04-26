@@ -6,26 +6,25 @@ import java.util.ArrayList;
  *
  */
 public class BoardState 
-{
-	
+{	
 	private ArrayList<ChessPiece> boardPieces;
 	
-	public BoardState(boolean isPlayingWhite)
-	{
+	public BoardState(boolean isPlayingWhite, boolean whiteStartBottom)
+	{		
 		this.boardPieces = new ArrayList<ChessPiece>();
 		
 		// Create whites pawns
 		for(int i = 0; i < 8; i++)
 		{
-			Pawn pawn = new Pawn(i,0, true);
+			Pawn pawn = new Pawn(i,(whiteStartBottom ? 1 : 6), true);
 			this.boardPieces.add(pawn);
 		}
 		
 		// Create blacks pawns
 		for(int i = 0; i < 8; i++)
 		{
-			Pawn pawn = new Pawn(i,7, false);
-			this.boardPieces.add(pawn); 
+			Pawn pawn = new Pawn(i,(!whiteStartBottom ? 1 : 6), false);
+			this.boardPieces.add(pawn);
 		}
 	}
 	

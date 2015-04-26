@@ -9,8 +9,8 @@ import java.util.Map;
  */
 public abstract class ChessPiece 
 {
-	private Map<String, Integer> pieceLocation;
-	private boolean isWhite;
+	protected Map<String, Integer> pieceLocation;
+	protected boolean isWhite;
 	
 	/**
 	 * Create a new chess piece
@@ -30,12 +30,7 @@ public abstract class ChessPiece
 	 * @return Map<String, Integer> the location with "Column" and "Row" keys
 	 */
 	public Map<String, Integer> getLocation()
-	{
-		/*if(this.pieceLocation == null)
-		{
-			throw new NoSuchFieldException("Location has not been set for this piece");
-		}*/
-		
+	{	
 		return this.pieceLocation;
 	}
 	
