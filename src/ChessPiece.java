@@ -51,12 +51,20 @@ public abstract class ChessPiece
 	 */
 	public boolean isLocationValid(int columnToCheck, int rowToCheck, BoardState stateOfBoard)
 	{
-		// Grab the piece on that square (if it's empty then it'll be null)
-		ChessPiece pieceAtPosition = stateOfBoard.getPieceAtPosition(
-				columnToCheck, rowToCheck);
+		if(rowToCheck >= 0 && rowToCheck < 8 && columnToCheck >= 0 && columnToCheck < 8)
+		{
+			// Grab the piece on that square (if it's empty then it'll be null)
+			ChessPiece pieceAtPosition = stateOfBoard.getPieceAtPosition(
+					columnToCheck, rowToCheck);
+			
+			// The square is valid if it's empty or the piece on the square isn't the same color
+			return (pieceAtPosition == null || pieceAtPosition.isWhite != this.isWhite);
+		}
 		
-		// The square is valid if it's empty or the piece on the square isn't the same color
-		return (pieceAtPosition == null || pieceAtPosition.isWhite != this.isWhite);
+		else
+		{
+			return false;
+		}
 	}
 	
 	/**

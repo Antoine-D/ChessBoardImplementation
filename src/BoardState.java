@@ -21,15 +21,13 @@ public class BoardState
 			this.boardPieces.add(pawn);
 		}
 		
-		this.boardPieces.add(new Pawn(1, (whiteStartsBottom ? 0 : 7), true));
-		this.boardPieces.add(new Pawn(6, (whiteStartsBottom ? 0 : 7), true));
-		
 		//Create rest of white's pieces
 		this.boardPieces.add(new Bishop(2, (whiteStartsBottom ? 0 : 7), true));
 		this.boardPieces.add(new Bishop(5, (whiteStartsBottom ? 0 : 7), true));
+		this.boardPieces.add(new Knight(1, (whiteStartsBottom ? 0 : 7), true));
+		this.boardPieces.add(new Knight(6, (whiteStartsBottom ? 0 : 7), true));
 		this.boardPieces.add(new Rooke(0, (whiteStartsBottom ? 0 : 7), true));
 		this.boardPieces.add(new Rooke(7, (whiteStartsBottom ? 0 : 7), true));
-		
 		
 				/* Create Black's Pieces */
 		// Create blacks pawns
@@ -42,6 +40,8 @@ public class BoardState
 		// Create rest of black's pieces
 		this.boardPieces.add(new Bishop(2, (!whiteStartsBottom ? 0 : 7), false));
 		this.boardPieces.add(new Bishop(5, (!whiteStartsBottom ? 0 : 7), false));
+		this.boardPieces.add(new Knight(1, (!whiteStartsBottom ? 0 : 7), true));
+		this.boardPieces.add(new Knight(6, (!whiteStartsBottom ? 0 : 7), true));
 		this.boardPieces.add(new Rooke(0, (!whiteStartsBottom ? 0 : 7), false));
 		this.boardPieces.add(new Rooke(7, (!whiteStartsBottom ? 0 : 7), false));
 	}
@@ -97,6 +97,11 @@ public class BoardState
 					else if(thisPiece instanceof Rooke)
 					{
 						boardVisual += "Rook \t \t";
+					}
+					
+					else if(thisPiece instanceof Knight)
+					{
+						boardVisual += "Knig \t \t";
 					}
 				}
 				

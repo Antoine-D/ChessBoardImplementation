@@ -32,14 +32,11 @@ public class Bishop extends ChessPiece {
 						+ columnIncrement;
 				int rowIterator = super.pieceLocation.get("Row") + rowIncrement;
 
-				while (rowIterator >= 0 && columnIterator >= 0
-						&& rowIterator < 8 && columnIterator < 8) 
+				while (rowIterator >= 0 && columnIterator >= 0 && rowIterator < 8 && columnIterator < 8) 
 				{
 					// Check that the location is valid
 					if(super.isLocationValid(columnIterator, rowIterator, stateOfBoard))
 					{
-						//System.out.println("here with col:" + columnIterator + "   row:" + rowIterator);
-
 						Map<String, Integer> validMoveToPosition = new HashMap<String, Integer>();
 						validMoveToPosition.put("Column", columnIterator);
 						validMoveToPosition.put("Row", rowIterator);

@@ -33,8 +33,6 @@ public class Rooke extends ChessPiece {
 			{				
 				if(super.isLocationValid(columnIterator, rowIterator, stateOfBoard))
 				{
-					System.out.println("here col: " + columnIterator + "    row: " + rowIterator + " square_inc: " + squareIncrement + "   isvertical: " + inVerticalMovement);
-
 					Map<String, Integer> validMoveToPosition = new HashMap<String, Integer>();
 					validMoveToPosition.put("Column", columnIterator);
 					validMoveToPosition.put("Row", rowIterator);
