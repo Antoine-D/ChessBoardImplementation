@@ -2,7 +2,8 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Bishop extends ChessPiece {
+public class Bishop extends ChessPiece 
+{
 
 	public Bishop(int column, int row, boolean isWhite) 
 	{

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Keeps track of the state of the board
@@ -22,6 +23,8 @@ public class BoardState
 		}
 		
 		//Create rest of white's pieces
+		this.boardPieces.add(new King(4, (whiteStartsBottom ? 0 : 7), true));
+		this.boardPieces.add(new Queen(3, (whiteStartsBottom ? 0 : 7), true));
 		this.boardPieces.add(new Bishop(2, (whiteStartsBottom ? 0 : 7), true));
 		this.boardPieces.add(new Bishop(5, (whiteStartsBottom ? 0 : 7), true));
 		this.boardPieces.add(new Knight(1, (whiteStartsBottom ? 0 : 7), true));
@@ -38,12 +41,15 @@ public class BoardState
 		}
 		
 		// Create rest of black's pieces
+		this.boardPieces.add(new King(3, (!whiteStartsBottom ? 0 : 7), false));
+		this.boardPieces.add(new Queen(4, (!whiteStartsBottom ? 0 : 7), false));
 		this.boardPieces.add(new Bishop(2, (!whiteStartsBottom ? 0 : 7), false));
 		this.boardPieces.add(new Bishop(5, (!whiteStartsBottom ? 0 : 7), false));
-		this.boardPieces.add(new Knight(1, (!whiteStartsBottom ? 0 : 7), true));
-		this.boardPieces.add(new Knight(6, (!whiteStartsBottom ? 0 : 7), true));
+		this.boardPieces.add(new Knight(1, (!whiteStartsBottom ? 0 : 7), false));
+		this.boardPieces.add(new Knight(6, (!whiteStartsBottom ? 0 : 7), false));
 		this.boardPieces.add(new Rooke(0, (!whiteStartsBottom ? 0 : 7), false));
 		this.boardPieces.add(new Rooke(7, (!whiteStartsBottom ? 0 : 7), false));
+
 	}
 	
 	/**
@@ -68,6 +74,49 @@ public class BoardState
 		
 		// no piece found at the location, so return null
 		return null;
+	}
+	
+	public boolean inCheck(boolean checkingWhite)
+	{
+		ArrayList<ChessPiece> chessPieces = this.getAllPieces();
+		
+		ChessPiece kingOfColorToCheck = null;
+		
+		ArrayList<ChessPiece> enemyChessPieces = new ArrayList<ChessPiece>();
+		
+		// Remove all friendly pieces from the array list and get the friendly king
+		for(ChessPiece piece : chessPieces)
+		{
+			if(piece.isWhite != checkingWhite)
+			{
+				enemyChessPieces.add(piece);
+			}
+			
+			else if(piece instanceof King)
+			{
+				kingOfColorToCheck = piece;
+			}
+		}
+		
+		if(kingOfColorToCheck != null) 
+		{
+			
+			// For all of the enemy pieces, check if they can move to the king's square
+			for(ChessPiece enemyPiece : enemyChessPieces)
+			{
+				ArrayList<Map<String, Integer>> possibleMoveLocations = enemyPiece.getPossibleMoveToLocations(this);
+				for(Map<String, Integer> possibleLocation : possibleMoveLocations)
+				{
+					if(possibleLocation.get("Column") == kingOfColorToCheck.pieceLocation.get("Column") &&
+							possibleLocation.get("Row") == kingOfColorToCheck.pieceLocation.get("Row"))
+					{
+						return true;
+					}				
+				}
+			}
+		}
+		
+		return false;
 	}
 	
 	public String getBoardVisual()
@@ -101,8 +150,20 @@ public class BoardState
 					
 					else if(thisPiece instanceof Knight)
 					{
-						boardVisual += "Knig \t \t";
+						boardVisual += "Kgnt \t \t";
 					}
+					
+					else if(thisPiece instanceof Queen)
+					{
+						boardVisual += "Quen \t \t";
+					}
+					
+					else if(thisPiece instanceof King)
+					{
+						boardVisual += "King \t \t";
+					}
+					
+					
 				}
 				
 				else
@@ -116,4 +177,6 @@ public class BoardState
 		
 		return boardVisual;
 	}
+	
+	
 }

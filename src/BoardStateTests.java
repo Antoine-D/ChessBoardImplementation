@@ -11,7 +11,7 @@ public class BoardStateTests
 	public void ensureAllPiecesPresent()
 	{
 		BoardState testBoardState = new BoardState(true, true);	
-		assertEquals(28, testBoardState.getAllPieces().size());
+		assertEquals(32, testBoardState.getAllPieces().size());
 	}
 
 	@Test
@@ -91,4 +91,40 @@ public class BoardStateTests
 		assertEquals(2, testBoardState.getPieceAtPosition(1, 6).getPossibleMoveToLocations(testBoardState).size());
 		assertEquals(2, testBoardState.getPieceAtPosition(6, 6).getPossibleMoveToLocations(testBoardState).size());
 	}
+	
+	@Test
+	public void testQueen()
+	{
+		BoardState testBoardState = new BoardState(true, true);
+		
+		ArrayList<Map<String, Integer>> possibleMoveLocations = testBoardState.getPieceAtPosition(4, 0).getPossibleMoveToLocations(testBoardState);
+
+		assertEquals(0, possibleMoveLocations.size());
+	}
+	
+	@Test
+	public void testKing()
+	{
+		BoardState testBoardState = new BoardState(true, true);
+		
+		ArrayList<Map<String, Integer>> possibleMoveLocations = testBoardState.getPieceAtPosition(5, 0).getPossibleMoveToLocations(testBoardState);
+
+		assertEquals(0, possibleMoveLocations.size());
+	}
+	
+	@Test
+	public void testCheck()
+	{
+		BoardState testBoardState = new BoardState(true, true);
+				
+		testBoardState.getPieceAtPosition(5, 1).moveTo(0, 2);
+		testBoardState.getPieceAtPosition(4, 1).moveTo(5, 1);
+		assertFalse(testBoardState.inCheck(true));
+		
+		testBoardState.getPieceAtPosition(4, 7).moveTo(4, 1);
+		
+		assertTrue(testBoardState.inCheck(true));
+	}
+	
+	
 }

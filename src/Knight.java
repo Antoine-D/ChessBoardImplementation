@@ -1,9 +1,10 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.HashMap;
 
 
-public class Knight extends ChessPiece 
+
+public class Knight extends ChessPiece
 {
 
 	public Knight(int column, int row, boolean isWhite) {
@@ -34,7 +35,7 @@ public class Knight extends ChessPiece
 			if(super.isLocationValid(knightsColumn + movement[0], 
 					knightsRow + movement[1], stateOfBoard))
 			{
-				HashMap<String, Integer> moveLocation = new HashMap<String, Integer>();
+				Map<String, Integer> moveLocation = new HashMap<String, Integer>();
 				moveLocation.put("Column", knightsColumn + movement[0]);
 				moveLocation.put("Row", knightsRow + movement[1]);
 				
